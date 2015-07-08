@@ -1,0 +1,19 @@
+To Install on Linux laptops
+
+$ sudo apt-get install python3-scipy python3-matplotlib ipython3-notebook idle3 python3-pip
+$ sudo apt-get install curl git screen default.jre
+$ sudo apt-get install skimage
+
+
+To get last ipython notebook
+$ pip3 install --user "ipython[notebook]"
+
+
+Add to ~/.bashrc
+export PATH=~/.local/bin:$PATH
+
+
+To run 
+$ mkdir Notebooks
+$ cd Notebooks
+$ ipython3 notebook
