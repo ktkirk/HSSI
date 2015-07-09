@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Brendan Le Foll <brendan.le.foll@intel.com>
 # Contributions: Sarah Knepper <sarah.knepper@intel.com>
 # Copyright (c) 2014 Intel Corporation.
@@ -21,6 +22,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time
 import pyupm_grove as grove
 import pyupm_th02 as th02
@@ -33,11 +35,10 @@ i2c_th = th02.TH02()
 for i in range(0, 10):
     temp = i2c_th.getTemperature()
     humid = i2c_th.getHumidity()
-    print temp, humid
-    #celsius = temp.value()
-    #fahrenheit = celsius * 9.0/5.0 + 32.0;
-    #print "%d degrees Celsius, or %d degrees Fahrenheit" \
-    #    % (celsius, fahrenheit)
+    celsius = temp
+    fahrenheit = celsius * 9.0/5.0 + 32.0
+    print("{} degrees Celsius, or {} degrees Fahrenheit".format(celsius, fahrenheit))
+    print("Humidity is {}%".format(humid))
     time.sleep(1)
 
 del i2c_th

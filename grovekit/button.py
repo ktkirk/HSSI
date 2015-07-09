@@ -20,6 +20,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time
 import pyupm_grove as grove
 
@@ -28,7 +29,7 @@ button = grove.GroveButton(0)
 
 # Read the input and print, waiting one second between readings
 while 1:
-    print button.name(), ' value is ', button.value()
+    print("{} value is {}".format(button.name(), button.value()))
     time.sleep(1)
 
 # Delete the button object

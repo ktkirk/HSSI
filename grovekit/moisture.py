@@ -21,6 +21,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time, sys, signal, atexit
 import pyupm_grovemoisture as upmMoisture
 
@@ -31,12 +32,12 @@ myMoisture = upmMoisture.GroveMoisture(1)
 ## Exit handlers ##
 # This function stops python from printing a stacktrace when you hit control-C
 def SIGINTHandler(signum, frame):
-	raise SystemExit
+    raise SystemExit
 
 # This function lets you run code on exit, including functions from myMoisture
 def exitHandler():
-	print "Exiting"
-	sys.exit(0)
+    print("Exiting")
+    sys.exit(0)
 
 # Register exit handlers
 atexit.register(exitHandler)
@@ -50,12 +51,12 @@ signal.signal(signal.SIGINT, SIGINTHandler)
 
 # Read the value every second and print the corresponding moisture level
 while(1):
-	moisture_val = myMoisture.value()
-	if (moisture_val >= 0 and moisture_val < 300):
-		result = "Dry"
-	elif (moisture_val >= 300 and moisture_val < 600):
-		result = "Moist"
-	else:
-		result = "Wet"
-	print "Moisture value: {0}, {1}".format(moisture_val, result)
-	time.sleep(1)
+    moisture_val = myMoisture.value()
+    if (moisture_val >= 0 and moisture_val < 300):
+        result = "Dry"
+    elif (moisture_val >= 300 and moisture_val < 600):
+        result = "Moist"
+    else:
+        result = "Wet"
+    print("Moisture value: {0}, {1}".format(moisture_val, result))
+    time.sleep(1)

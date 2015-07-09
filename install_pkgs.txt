@@ -1,4 +1,4 @@
-To Install on Linux laptops
+To Install IPython on Linux laptops
 
 $ sudo apt-get install python3-scipy python3-matplotlib ipython3-notebook idle3 python3-pip
 $ sudo apt-get install curl git screen default.jre
@@ -17,3 +17,12 @@ To run
 $ mkdir Notebooks
 $ cd Notebooks
 $ ipython3 notebook
+
+
+
+
+Update latest mraa and upm on Edison
+$ echo "src mraa-upm http://iotdk.intel.com/repos/1.5/intelgalactic-dev" > /etc/opkg/mraa-upm.conf
+$ opkg update
+$ opkg install libmraa0
+$ opkg install upm

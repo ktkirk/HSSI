@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # Author: Sarah Knepper <sarah.knepper@intel.com>
 # Copyright (c) 2015 Intel Corporation.
 #
@@ -20,6 +21,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time
 import pyupm_grove as grove
 
@@ -27,7 +29,7 @@ import pyupm_grove as grove
 led = grove.GroveLed(13)
 
 # Print the name
-print led.name()
+print(led.name())
 
 # Turn the LED on and off 10 times, pausing one second
 # between transitions

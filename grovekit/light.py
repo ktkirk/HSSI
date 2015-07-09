@@ -20,6 +20,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time
 import pyupm_grove as grove
 
@@ -29,8 +30,8 @@ light = grove.GroveLight(0)
 # Read the input and print both the raw value and a rough lux value,
 # waiting one second between readings
 while 1:
-    print light.name() + " raw value is %d" % light.raw_value() + \
-        ", which is roughly %d" % light.value() + " lux";
+    print("{} raw value is {}".format(light.name(), light.raw_value()), end='')
+    print(", which is roughly {} lux".format(light.value()))
     time.sleep(1)
 
 # Delete the light sensor object

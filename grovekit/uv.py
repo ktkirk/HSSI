@@ -21,6 +21,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time, sys, signal, atexit
 import pyupm_guvas12d as upmUV
 
@@ -35,22 +36,18 @@ SAMPLES_PER_QUERY = 1024;
 ## Exit handlers ##
 # This function stops python from printing a stacktrace when you hit control-C
 def SIGINTHandler(signum, frame):
-	raise SystemExit
+    raise SystemExit
 
 # This function lets you run code on exit, including functions from myUVSensor
 def exitHandler():
-	print "Exiting"
-	sys.exit(0)
+    print("Exiting")
+    sys.exit(0)
 
 # Register exit handlers
 atexit.register(exitHandler)
 signal.signal(signal.SIGINT, SIGINTHandler)
 
-
 while(1):
-	s = ("AREF:  {0}, "
-	"Voltage value (higher means more UV): "
-	"{1}".format(GUVAS12D_AREF,
-	myUVSensor.value(GUVAS12D_AREF, SAMPLES_PER_QUERY)))
-	print s
-	time.sleep(1)
+    print("AREF:  {0}, Voltage value (higher means more UV): {1}".format(
+        GUVAS12D_AREF, myUVSensor.value(GUVAS12D_AREF, SAMPLES_PER_QUERY)))
+    time.sleep(1)

@@ -1,5 +1,8 @@
-# pot_touch_led_lcd.py
+#!/usr/bin/env python
 
+from __future__ import print_function
+import pyupm_grove as grove
+import pyupm_th02 as th02
 import pyupm_i2clcd as lcd
 import mraa
 import time
@@ -11,13 +14,13 @@ import math
 	Attached LED - Digital I/O 13
 	Attached Buzzer to D4 - Digital I/O 4
 	Attached LCD panel to I2C0
-	Attached Potentiometer to A0 - Analog 0
+	Attached Moisture Sensor to A1 - Analog 1
 	Attached Light Sensor to A1 - Analog 1
-	Attached Temperature Sensor to A2 - Analog 2
+	Attached Temperature & Humidity Sensor to I2C
 """
 
 # analog input - pot
-potPin = 0
+potPin = 1
 pot = mraa.Aio(potPin)
 potVal = 0
 potGrnVal=0
@@ -27,13 +30,10 @@ lightPin=1
 lum = mraa.Aio(lightPin)
 lumVal = 0
 
-tmpPin=2
-tmp = mraa.Aio(tmpPin)
-tmpVal = 0
-
+i2c_th = th02.TH02()
 
 # digital output - led
-ledPin = mraa.Gpio(4)
+ledPin = mraa.Gpio(13)
 ledPin.dir(mraa.DIR_OUT)
 ledPin.write(0)
 
@@ -63,25 +63,20 @@ while 1:
         potVal = int(pot.read()*.249)
         lumVal = float(lum.read())
         tmp1Val = float(tmp.read())
-        bVal = 3975
-        resistanceVal = (1023 - tmp1Val) * 10000 / tmp1Val
-        celsiusVal = 1 / (math.log(resistanceVal / 10000) / bVal + 1 / 298.15) - 273.15
+        celsiusVal = i2c_th.getTemperature()
+        humidVal = i2c_th.getHumidity()
         fahrVal = (celsiusVal * (9 / 5)) + 32
         tmpVal = fahrVal  
 
+        print("Moisture: {0}  Lumens: {1}".format(potVal, lumVal))
+        print("Temperature: {0} F  Humidity: {1}%".format(tmpVal, humidVal))
 
-
-
-
-        print "Pot: "+ str(potVal)+" Lumens: "+ str(lumVal)+" Temp: "+ str(tmpVal)   
-
-        potStr = "P:" + str(potVal) + "L:" + str(lumVal)
+        potStr = "M: {0}  L: {1}".format(potVal, lumVal)
         lcdDisplay.setCursor(0, 0)
         lcdDisplay.setColor(potVal,0,0)
         lcdDisplay.write(potStr)
-        
-        
-        lumStr = "Temp: "+str(tmpVal)
+
+        lumStr = "T: {0} F  H: {1}%".format(tmpVal, humidVal)
         lcdDisplay.setCursor(1, 0)
         lcdDisplay.write(lumStr)
 
@@ -92,8 +87,7 @@ while 1:
         time.sleep(3)
         potbluVal = int(pot.read()*.249)
         # Print "Blue: " + str(potbluVal)
-        lcdDisplay.setColor(potVal,potgrnVal,potbluVal)        
-        
+        lcdDisplay.setColor(potVal,potgrnVal,potbluVal)
 
     # turn led off
     ledPin.write(0)

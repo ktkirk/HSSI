@@ -20,6 +20,7 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+from __future__ import print_function
 import time
 import pyupm_grove as grove
 
@@ -33,11 +34,11 @@ relay = grove.GroveRelay(5)
 for i in range (0,3):
     relay.on()
     if relay.isOn():
-        print relay.name(), 'is on'
+        print(relay.name() + ' is on')
     time.sleep(1)
     relay.off()
     if relay.isOff():
-        print relay.name(), 'is off'
+        print(relay.name() + ' is off')
     time.sleep(1)
 
 # Delete the relay switch object
