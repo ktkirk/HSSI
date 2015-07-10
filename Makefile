@@ -11,5 +11,8 @@ get:
 usb-ip:
 	sudo ifconfig usb0 inet 192.168.2.10
 
+proxy:
+	microproxy -config=Config/microproxy.json
+
 put:
-	scp -r grovekit root@edison.local:.
+	rsync -ai grovekit IoT root@edison.local:. --rsync-path=/home/root/.local/bin/rsync

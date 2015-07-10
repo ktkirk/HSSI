@@ -18,3 +18,7 @@ update-mraa: $(REPO_FILE)
 
 update-upm: update-mraa
 	opkg install upm
+
+time:
+	# update system time over the internet
+	rdate -s rdate.cpanel.net
