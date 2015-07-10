@@ -3,6 +3,7 @@
 from __future__ import print_function
 import time, sys, signal, atexit
 import pyupm_grove as grove
+import pyupm_i2clcd as lcd
 import pyupm_th02 as th02
 import pyupm_guvas12d as upmUV
 import pyupm_grovemoisture as upmMoisture
@@ -15,6 +16,12 @@ __author__ = 'ktkirk'
 # Load data.sparkfun.com keys file
 with open("keys_n1YRX98dq9C6X0LrZdvD.json") as json_file:
     keys = json.load(json_file)
+
+# Initialize Jhd1313m1 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS)
+myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62)
+myLcd.setColor(53, 39, 249)
+myLcd.setCursor(0,0)
+myLcd.write('IoT')
 
 # Instantiate a Grove Moisture sensor on analog pin A1
 moisture = upmMoisture.GroveMoisture(1)
@@ -59,9 +66,12 @@ while(True):
     uv_val = uv.value(GUVAS12D_AREF, SAMPLES_PER_QUERY)
     moisture_val = moisture.value()
 
-    print("LOG:", device, temp, humid, lux_val, uv_val, moisture_val)
+    #print("LOG:", device, temp, humid, lux_val, uv_val, moisture_val)
     p.log(device, temp, humid, lux_val, uv_val, moisture_val)
-    print(p.remaining_bytes, p.cap)
+    #print(p.remaining_bytes, p.cap)
+
+    myLcd.setCursor(1, 0)
+    myLcd.write("Bytes: {}".format(p.remaining_bytes))
 
     #data = p.get()
     #print(data['temp'])
