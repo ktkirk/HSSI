@@ -11,10 +11,13 @@ import requests
 from iot_utils import *
 
 __author__ = 'KT Kirk'
+"""
+ Send sensor one time, uses with hssi_iot.service
+"""
 
 # Initialize Jhd1313m1 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS)
 myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62)
-myLcd.setColor(53, 249, 39 ) # Green
+myLcd.setColor(53, 39, 249) # Blue
 myLcd.setCursor(0,0)
 myLcd.write('IoT')
 
@@ -40,24 +43,21 @@ p = Phant(keys["publicKey"],
 
 device = open("/factory/serial_number").read().strip('\n')
 
-while(True):
-    temp = i2c_th.getTemperature()
-    humid = i2c_th.getHumidity()
-    lux_val = light.value()
-    uv_val = uv.value(GUVAS12D_AREF, SAMPLES_PER_QUERY)
-    moisture_val = moisture.value()
+temp = i2c_th.getTemperature()
+humid = i2c_th.getHumidity()
+lux_val = light.value()
+uv_val = uv.value(GUVAS12D_AREF, SAMPLES_PER_QUERY)
+moisture_val = moisture.value()
 
-    myLcd.setCursor(1, 0)
-    try:
-        p.log(device, temp, humid, lux_val, uv_val, moisture_val)
-    except requests.exceptions.ConnectionError as e:
-        print("Connection error with data.sparkfun.com")
-        myLcd.setColor(255, 0, 0) # Red
-        myLcd.write("Error")
-    else:
-        myLcd.setColor(53, 39, 249) # Bl
-        myLcd.write("Sent Bytes: {}".format(p.remaining_bytes))
+myLcd.setCursor(1, 0)
+try:
+    p.log(device, temp, humid, lux_val, uv_val, moisture_val)
+except requests.exceptions.ConnectionError as e:
+    print("Connection error with data.sparkfun.com")
+    myLcd.setColor(255, 0, 0) # Red
+    myLcd.write("Error")
+else:
+    myLcd.setColor(53, 249, 39 ) # Green
+    myLcd.write("Sent Bytes: {}".format(p.remaining_bytes))
 
-    #data = p.get()
-    #print(data['temp'])
-    time.sleep(60 * 5)
+time.sleep(10)

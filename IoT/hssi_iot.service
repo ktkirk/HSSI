@@ -1,0 +1,10 @@
+[Unit]
+Description=HSSI IoT daemon
+
+[Service]
+Type=oneshot
+ExecStart=/home/root/IoT/iot.sh
+
+[Install]
+WantedBy=multi-user.target
+

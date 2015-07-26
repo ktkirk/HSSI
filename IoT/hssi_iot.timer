@@ -1,0 +1,10 @@
+[Unit]
+Description=HSSI IoT ever minite
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
