@@ -1,4 +1,6 @@
 
+get-keys:
+	wget http://10.232.106.230:8500/ui/files/keys_n1YRX98dq9C6X0LrZdvD.json
 
 install:
 	cp -v hssi_iot.* /etc/systemd/system/.
@@ -14,4 +16,3 @@ status:
 start:
 	systemctl start hssi_iot.timer
 	systemctl start hssi_iot.service
-
