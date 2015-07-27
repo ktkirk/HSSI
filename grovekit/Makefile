@@ -23,3 +23,6 @@ update-upm: update-mraa
 time:
 	# update system time over the internet
 	rdate -s rdate.cpanel.net
+
+clean:
+	rm -f $(REPO_FILE)
