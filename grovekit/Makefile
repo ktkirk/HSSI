@@ -6,7 +6,7 @@ STD_REPO_URL := http://iotdk.intel.com/repos/1.5/intelgalactic
 DEV_REPO_URL := http://iotdk.intel.com/repos/1.5/intelgalactic-dev
 MY_REPO_URL  := http://10.232.106.230:8500/ui/files/repos
 REPO_FILE    := /etc/opkg/mraa-upm.conf
-REPO_URL     := $(DEV_REPO_URL)
+REPO_URL     := $(MY_REPO_URL)
 
 all: update-upm
 
