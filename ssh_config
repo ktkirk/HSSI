@@ -1,0 +1,6 @@
+StrictHostKeyChecking no
+
+host edison
+  HostName 192.168.2.15
+  User root
+
