@@ -23,6 +23,8 @@
 
 import pyupm_i2clcd as lcd
 import time
+import random
+
 # Initialize Jhd1313m1 at 0x3E (LCD_ADDRESS) and 0x62 (RGB_ADDRESS) 
 myLcd = lcd.Jhd1313m1(0, 0x3E, 0x62)
 
@@ -30,11 +32,14 @@ myLcd.setCursor(0,0)
 # RGB Blue
 #myLcd.setColor(53, 39, 249)
 
-# RGB Red
-myLcd.setColor(255, 0, 0)
+while(True):
+    r = random.randint(0, 256)
+    g = random.randint(0, 256)
+    b = random.randint(0, 256)
+    myLcd.setColor(r, g, b)
 
-myLcd.write('Hello World')
-myLcd.setCursor(1,2)
-myLcd.write('Hello World')
+    myLcd.write('Hello World')
+    myLcd.setCursor(1,2)
+    myLcd.write("R: {} G: {} B:{}".format(r, g, b))
 
-time.sleep(5)
+    time.sleep(1)
