@@ -26,3 +26,6 @@ proxy:
 
 put:
 	rsync -ai grovekit IoT root@edison.local:. --rsync-path=/home/root/.local/bin/rsync
+
+clean:
+	rm -f $(SSH_CONFIG)
