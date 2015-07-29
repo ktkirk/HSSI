@@ -1,20 +1,22 @@
 
 
 GROVE_KIT_FILES := $(wildcard grovekit/*.py)
+SSH_CONFIG := $(HOME)/.ssh/config
 
 get:
 	#scp -r root@edison.local:grovekit .
 	cp -vu ~/Notebooks/High\ School/Links.ipynb .
 	cp -vu ~/Notebooks/install_pkgs.txt .
 
+ssh-setup: $(SSH_CONFIG)
+	ssh-copy-id edison
 
-ssh-setup:
-	mkdir -p $(HOME)/.ssh
-	chmod 700 $(HOME)/.ssh
-	cp -vu ssh_config $(HOME)/.ssh/config
-
-to-edison:
+to-edison: ssh-setup
 	scp -r grovekit edison:.
+
+$(SSH_CONFIG): ssh_config
+	ssh-keygen -q -N ""
+	cp -vu $< $@
 
 usb-ip:
 	sudo ifconfig usb0 inet 192.168.2.10
