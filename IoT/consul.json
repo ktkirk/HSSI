@@ -1,0 +1,7 @@
+{
+  "client_addr" : "0.0.0.0",
+  "datacenter" : "hssi",
+  "server" : true,
+  "data_dir" : "/tmp/consul",
+  "ui_dir" : "/home/root/ui"
+}
