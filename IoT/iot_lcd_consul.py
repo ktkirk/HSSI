@@ -53,7 +53,7 @@ while True:
 
     myLcd.setCursor(1, 0)
     try:
-        for c, v in zip(cols, put_data):
+        for c, v in zip(items, put_data):
             requests.put(URL + '/{}'.format(c), v)
     except requests.exceptions.ConnectionError as e:
         print("Connection error")
@@ -61,6 +61,6 @@ while True:
         myLcd.write("Error")
     else:
         myLcd.setColor(53, 39, 249) # Blue
-        myLcd.write("{}".format(put))
+         myLcd.write("OK")
 
     time.sleep(60)

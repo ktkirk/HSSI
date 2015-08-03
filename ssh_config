@@ -3,4 +3,5 @@ StrictHostKeyChecking no
 host edison
   HostName 192.168.2.15
   User root
-
+  LogLevel QUIET
+  UserKnownHostsFile /dev/null
