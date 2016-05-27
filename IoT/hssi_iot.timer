@@ -1,9 +1,12 @@
 [Unit]
-Description=HSSI IoT ever minite
+Description=HSSI IoT ever 5 minite
 
 [Timer]
-OnCalendar=*-*-* *:*:00
-Persistent=true
+OnBootSec=1min
+#OnCalendar=*-*-* *:*:00
+OnUnitActiveSec=5min
+Unit=hssa_iot.service
+#Persistent=true
 
 [Install]
 WantedBy=timers.target
