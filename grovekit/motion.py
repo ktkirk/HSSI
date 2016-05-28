@@ -45,8 +45,8 @@ signal.signal(signal.SIGINT, SIGINTHandler)
 
 
 # Read the value every second and detect motion
-while(1):
-    if (myMotion.value()):
+while True:
+    if myMotion.value():
         print("Detecting moving object")
     else:
         print("No moving objects detected")

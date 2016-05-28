@@ -26,11 +26,11 @@ import time, sys, signal, atexit
 import pyupm_guvas12d as upmUV
 
 # Instantiate a UV sensor on analog pin A3
-myUVSensor = upmUV.GUVAS12D(3);
+myUVSensor = upmUV.GUVAS12D(3)
 
 # analog voltage, usually 3.3 or 5.0
-GUVAS12D_AREF = 5.0;
-SAMPLES_PER_QUERY = 1024;
+GUVAS12D_AREF = 5.0
+SAMPLES_PER_QUERY = 1024
 
 
 ## Exit handlers ##

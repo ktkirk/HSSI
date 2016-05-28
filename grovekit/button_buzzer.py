@@ -36,7 +36,7 @@ mySpeaker = upmGrovespeaker.GroveSpeaker(4)
 while 1:
     print("{} value is {}".format(button.name(), button.value()))
     if button.value():
-        Speaker.playSound('c', True, "med")
+        mySpeaker.playSound('c', True, "med")
     time.sleep(1)
 
 # Delete the button object

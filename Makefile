@@ -24,6 +24,16 @@ usb-ip:
 proxy:
 	microproxy -config=Config/microproxy.json
 
+sftp:
+	xdk-whitelist --add 127.0.0.1
+	xdk-whitelist --add 192.168.1.4
+	xdk-whitelist --add 192.168.1.5
+	xdk-whitelist --add 192.168.1.172
+	# sftp://root@192.168.1.172
+
+pyro:
+	pip install --user Pyro4
+
 put:
 	rsync -ai grovekit IoT root@edison.local:. --rsync-path=/home/root/.local/bin/rsync
 
